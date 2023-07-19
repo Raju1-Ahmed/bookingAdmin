@@ -4,12 +4,14 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
+import Loading from "../../components/loading/Loading";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  // const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -23,9 +25,12 @@ const New = ({ inputs, title }) => {
       return;
     }
 
+    setIsLoading(true); // Set loading state to true before data insertion
+
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "upload");
+
     try {
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/dmrxamgbh/image/upload",
@@ -40,11 +45,11 @@ const New = ({ inputs, title }) => {
       };
 
       await axios.post("http://localhost:8800/api/auth/register", newUser);
-      setSuccessMessage("Data and file are successfully inserted.");
+      // setSuccessMessage("Data and file are successfully inserted.");
 
       // Clear the form and file input after successful insertion
       setInfo({});
-      setFile(null);
+      setFile("");
     } catch (err) {
       if (err.response) {
         // The request was made and the server responded with a status code
@@ -62,6 +67,8 @@ const New = ({ inputs, title }) => {
         setErrorMessage(errorMessage);
         console.log(err.message);
       }
+    } finally {
+      setIsLoading(false); // Set loading state to false after data insertion, regardless of success or failure
     }
   };
 
@@ -115,11 +122,12 @@ const New = ({ inputs, title }) => {
           </div>
         </div>
         {errorMessage && <p className="error">{errorMessage}</p>}
-        {successMessage && (
+        {/* {successMessage && (
           <div className="popup">
             <p>{successMessage}</p>
           </div>
-        )}
+        )} */}
+        {isLoading && <Loading />} {/* Render the loading spinner while isLoading is true */}
       </div>
     </div>
   );
