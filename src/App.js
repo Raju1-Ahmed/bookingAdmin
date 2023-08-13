@@ -31,15 +31,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route path="login" element={<Login />} />
-            <Route
+             <Route
               index
               element={
                 <ProtectedRoute>
                   <Home />
                 </ProtectedRoute>
               }
-            />
+            /><Route path="login" element={<Login />} />
             <Route path="users">
               <Route
                 index
