@@ -14,7 +14,7 @@ const NewHotel = () => {
   const [rooms, setRooms] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // New state variable
 
-  const { data, loading, error } = useFetch("http://localhost:8800/api/rooms");
+  const { data, loading, error } = useFetch("https://villaverse.onrender.com/api/rooms");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -61,7 +61,7 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("http://localhost:8800/api/hotels", newhotel);
+      await axios.post("https://villaverse.onrender.com/api/hotels", newhotel);
       console.log("Hotel created successfully!");
     } catch (err) {
       console.log("Error creating hotel:", err.response);

@@ -14,7 +14,7 @@ const NewRoom = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false); // Add loading state
 
-  const { data, error } = useFetch("http://localhost:8800/api/hotels");
+  const { data, error } = useFetch("https://villaverse.onrender.com/api/hotels");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -27,7 +27,7 @@ const NewRoom = () => {
     setLoading(true); // Set loading to true before making the request
 
     try {
-      const response = await axios.post(`http://localhost:8800/api/rooms/${hotelId}`, { ...info, roomNumbers });
+      const response = await axios.post(`https://villaverse.onrender.com/api/rooms/${hotelId}`, { ...info, roomNumbers });
       // Handle the successful response here
       console.log(response.data); // Example: log the response data
     } catch (err) {

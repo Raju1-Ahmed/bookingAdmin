@@ -15,7 +15,7 @@ const Datatable = ({ columns }) => {
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
-  const { data, loading: fetchDataLoading, error } = useFetch(`http://localhost:8800/api/${path}`);
+  const { data, loading: fetchDataLoading, error } = useFetch(`https://villaverse.onrender.com/api/${path}`);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -26,7 +26,7 @@ const Datatable = ({ columns }) => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:8800/api/${path}/${deleteItemId}`);
+      await axios.delete(`https://villaverse.onrender.com/api/${path}/${deleteItemId}`);
       setList(list.filter((item) => item._id !== deleteItemId));
     } catch (err) {
       console.error(err);

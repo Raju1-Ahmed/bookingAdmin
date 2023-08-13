@@ -44,7 +44,7 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("http://localhost:8800/api/auth/register", newUser);
+      await axios.post("https://villaverse.onrender.com/api/auth/register", newUser);
       // setSuccessMessage("Data and file are successfully inserted.");
 
       // Clear the form and file input after successful insertion
