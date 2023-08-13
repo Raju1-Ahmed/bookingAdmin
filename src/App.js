@@ -19,9 +19,9 @@ function App() {
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);
 
-    if (!user) {
-      return <Navigate to="/login" />;
-    }
+    // if (!user) {
+    //   return <Navigate to="/login" />;
+    // }
 
     return children;
   };
@@ -29,7 +29,8 @@ function App() {
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
-        <Routes>
+        <Routes>            
+          {/* <Route path="login" element={<Login />} /> */}
           <Route path="/">
              <Route
               index
@@ -38,7 +39,7 @@ function App() {
                   <Home />
                 </ProtectedRoute>
               }
-            /><Route path="login" element={<Login />} />
+            />
             <Route path="users">
               <Route
                 index
